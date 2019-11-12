@@ -1,15 +1,21 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Vue from "vue";
+import Router from "vue-router";
+import NewClient from "@/components/NewClient";
+import VisualizeClients from "@/components/VisualizeClients";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: "/newclient",
+      name: "NewClient",
+      component: NewClient
+    },
+    {
+      path: "/visualizeclients",
+      name: "VisualizeClients",
+      component: VisualizeClients
     }
   ]
-})
+});
