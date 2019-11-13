@@ -14,13 +14,13 @@
           </ul>
         </li>
         <li>
-          <a href>Ordens</a>
+          <a href>Roles</a>
           <ul class="submenu">
             <li>
               <a href="#!/neworder">Adicionar Ordem</a>
             </li>
             <li>
-              <a href="#!/orders">Visualizar Ordens</a>
+              <a href="/#/roles">Visualizar Ordens</a>
             </li>
           </ul>
         </li>
