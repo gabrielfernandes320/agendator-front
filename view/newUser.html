@@ -1,0 +1,109 @@
+<div class="jumbotron" ng-controller="clientController">
+  <h3>Novo cliente</h3>
+  <form name="clientForm">
+    <input
+      class="form-control"
+      type="text"
+      ng-model="user.name"
+      placeholder="Nome"
+      name="name"
+      ng-required="true"
+    />
+    <input
+      class="form-control"
+      type="text"
+      ng-model="user.birthday"
+      placeholder="Data de nascimento"
+      name="birthday"
+      ng-required="true"
+    />
+    <input
+      class="form-control"
+      type="text"
+      ng-model="user.phone"
+      placeholder="Telefone"
+      name="phone"
+      ng-required="true"
+    />
+    <select
+      class="browser-default custom-select"
+      ng-model="user.phase"
+      ng-required="true"
+    >
+      <option selected>Fase</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+    <input
+      class="form-control"
+      type="email"
+      ng-model="user.email"
+      placeholder="Email"
+      name="email"
+      ng-required="true"
+    />
+    <input
+      class="form-control"
+      type="text"
+      ng-model="user.advisor"
+      placeholder="Orientador"
+      name="advisor"
+      ng-required="true"
+    />
+    <select class="browser-default custom-select">
+      <option selected>Sexo</option>
+      <option value="1">Masculino</option>
+      <option value="2">Feminino</option>
+      <option value="3">Prefiro nao informar</option>
+    </select>
+  </form>
+  <div
+    ng-show="clientForm.name.$error.required && clientForm.name.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preecha o nome!
+  </div>
+  <div ng-show="clientForm.name.$error.minlenght" class="alert alert-danger">
+    O nome deve possuir mais de 5 caracteres!
+  </div>
+  <div
+    ng-show="clientForm.adress.$error.required && clientForm.adress.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preecha o endereço!
+  </div>
+  <div
+    ng-show="clientForm.phone.$error.required && clientForm.phone.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preecha o telefone!
+  </div>
+  <div
+    ng-show="clientForm.email.$error.required && clientForm.email.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preecha o email!
+  </div>
+  <div
+    ng-show="clientForm.email.$invalid && clientForm.email.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preencha o email no formato correto!
+  </div>
+  <div>
+    <button
+      class="btn btn-primary btn-block"
+      ng-click="addClient(user)"
+      ng-disabled="clientForm.$invalid"
+    >
+      Adicionar cliente
+    </button>
+  </div>
+</div>
