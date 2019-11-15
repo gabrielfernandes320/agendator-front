@@ -6,4 +6,8 @@ angular.module("agendator").config(function($routeProvider) {
     templateUrl: "view/listUsers.html",
     controller: "userController"
   });
+  $routeProvider.when("/courses", {
+    templateUrl: "view/listCourses.html",
+    controller: "courseController"
+  });
 });

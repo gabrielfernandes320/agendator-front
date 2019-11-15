@@ -2,16 +2,16 @@ angular
   .module("agendator")
   .controller("userController", function($scope, $http) {
     $scope.app = "agendator";
-    $scope.clients = [];
-    $scope.selectedClient = {};
+    $scope.users = [];
+    $scope.selectedUser = {};
 
-    var loadClients = function() {
+    var loadUsers = function() {
       $http
-        .get("http://localhost:9000/api/v1/customers")
+        .get("http://localhost:3333/usuarios")
         .then(successCallback, errorCallback);
 
       function successCallback(response) {
-        $scope.clients = response.data;
+        $scope.users = response.data;
       }
       function errorCallback(error) {
         console.log(error);
@@ -22,40 +22,41 @@ angular
       console.log("OK");
     };
 
-    $scope.addClient = function(client) {
+    $scope.addUser = function(user) {
+      console.log(user);
       $http
-        .post("http://localhost:9000/api/v1/customers", client)
+        .post("http://localhost:3333/usuarios", user)
         .then(successCallback, errorCallback);
       function successCallback() {
-        delete $scope.client;
-        $scope.clientForm.$setPristine();
+        delete $scope.user;
+        $scope.userForm.$setPristine();
       }
       function errorCallback(error) {
         console.log(error);
       }
     };
 
-    $scope.deleteClient = function(client) {
+    $scope.deleteUser = function(user) {
       $http({
         method: "DELETE",
-        url: "http://localhost:9000/api/v1/customers" + "/" + client.id
+        url: "http://localhost:9000/api/v1/customers" + "/" + user.id
       });
-      var index = $scope.clients.indexOf(client);
+      var index = $scope.users.indexOf(user);
       if (index > -1) {
-        $scope.clients.splice(index, 1);
+        $scope.users.splice(index, 1);
       }
     };
 
-    $scope.updateClient = function(client) {
+    $scope.updateUser = function(user) {
       $http({
         method: "PUT",
-        url: "http://localhost:9000/api/v1/customers" + "/" + client.id,
-        data: client
+        url: "http://localhost:9000/api/v1/customers" + "/" + user.id,
+        data: user
       });
       $scope.reset();
     };
 
-    var getClient = function(id) {
+    var getUser = function(id) {
       $http
         .get("http://localhost:9000/api/v1/customers" + "/" + id)
         .then(successCallback, errorCallback);
@@ -68,25 +69,25 @@ angular
       }
     };
 
-    $scope.isClientSelected = function(clients) {
-      return clients.some(function(clients) {
-        return clients.selected;
+    $scope.isUserSelected = function(users) {
+      return users.some(function(users) {
+        return users.selected;
       });
     };
 
-    $scope.getTemplate = function(client) {
-      if (client.id === $scope.selectedClient.id) {
+    $scope.getTemplate = function(user) {
+      if (user.id === $scope.selectedUser.id) {
         return "edit";
       } else return "display";
     };
 
-    $scope.editClient = function(client) {
-      $scope.selectedClient = angular.copy(client);
+    $scope.editUser = function(user) {
+      $scope.selectedUser = angular.copy(user);
     };
 
     $scope.reset = function() {
-      $scope.selectedClient = {};
+      $scope.selectedUser = {};
     };
 
-    loadClients();
+    loadUsers();
   });

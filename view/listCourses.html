@@ -1,0 +1,45 @@
+<div class="jumbotron">
+  <h3>coursees</h3>
+  <input
+    type="text"
+    class="form-control"
+    ng-model="searchParameter"
+    placeholder="Pesquisar..."
+  />
+  <table class="table table-striped" style="width: 100%;">
+    <thead>
+      <th>Id</th>
+      <th>Descricao</th>
+      <th></th>
+    </thead>
+    <tr
+      ng-class="{selected: course.selected}"
+      ng-repeat="course in courses | filter: searchParameter"
+      ng-include="getTemplate(course)"
+    ></tr>
+  </table>
+
+  <script type="text/ng-template" id="display">
+    <td>{{ course.id }}</td>
+    <td>{{ course.descricao }}</td>
+    <td>
+      <div style="width: 20px; height: 20px;"></div>
+    </td>
+    <td>
+      <button type="button" class="btn btn-primary btn-primary" ng-click="editcourse(course)">Editar</button>
+      <button class="btn btn-danger" ng-click="deletecourse(course)">Apagar</button>
+    </td>
+  </script>
+
+  <script type="text/ng-template" id="edit">
+    <td>{{ course.id }}</td>
+    <td><input type="text" ng-model=course.descricao class="form-control input-sm"/></td>
+    <td>
+      <div class="btn-group">
+     <button type="button" class="btn btn-primary" ng-click="updatecourse(course)">Salvar</button>
+     <button type="button" class="btn btn-danger" ng-click="reset()">Cancelar</button>
+     </div>
+    </td>
+  </script>
+  <hr />
+</div>
