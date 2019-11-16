@@ -4,10 +4,12 @@ angular
     $scope.app = "agendator";
     $scope.users = [];
     $scope.selectedUser = {};
+    $scope.logged = false;
+    $scope.autToken = {};
+    $scope.loggedUser = {};
 
     $http.defaults.headers.common["Authorization"] =
-      "Bearer " +
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGlwbyI6IkEiLCJpYXQiOjE1NzM4Nzc4OTYsImV4cCI6MTU3NDQ4MjY5Nn0.hTEWBs4WV-iukiP9nDlAaeEVF8o8L03_qP0Mv0ETNa0";
+      "Bearer " + $scope.autToken;
     var loadUsers = function() {
       $http
         .get("http://localhost:3333/usuarios")
@@ -21,8 +23,18 @@ angular
       }
     };
 
-    $scope.vai = function() {
-      console.log("OK");
+    $scope.login = function(user) {
+      $http
+        .post("http://localhost:3333/sessions", user)
+        .then(successCallback, errorCallback);
+      function successCallback(response) {
+        $scope.autToken = response.data.token;
+        $scope.loggedUser = res.data.usuario;
+        $scope.logged = true;
+      }
+      function errorCallback(error) {
+        console.log(error);
+      }
     };
 
     $scope.addUser = function(user) {

@@ -17,11 +17,13 @@
     <script src="js/controllers/activityCtrl.js"></script>
   </head>
   <body>
-    <div class="container" ng-app="agendator">
+    <div class="container" ng-app="agendator" ng-controller="userController">
       <header></header>
       <div ng-view></div>
-      <div ng-include="'view/sidebar.html'"></div>
-      <div ng-include="'view/footer.html'"></div>
+      <div ng-if="logged">
+        <div ng-include="'view/sidebar.html'"></div>
+        <div ng-include="'view/footer.html'"></div>
+      </div>
     </div>
   </body>
 </html>

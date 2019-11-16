@@ -7,7 +7,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container login-container">
+<div ng-if="logged === false" class="container login-container">
   <div class="row">
     <div class="col-md-6 login-form-1">
       <h3>Login for Form 1</h3>
@@ -16,6 +16,7 @@
           <input
             type="text"
             class="form-control"
+            ng-model="user.email"
             placeholder="Your Email *"
             value=""
           />
@@ -24,15 +25,21 @@
           <input
             type="password"
             class="form-control"
+            ng-model="user.password"
             placeholder="Your Password *"
             value=""
           />
         </div>
         <div class="form-group">
-          <input href="#!/home" type="submit" class="btnSubmit" value="Login" />
+          <input
+            type="submit"
+            class="btnSubmit"
+            value="Login"
+            ng-click="login(user)"
+          />
         </div>
         <div class="form-group">
-          <a href="#!/home" class="ForgetPwd">Forget Password?</a>
+          <a class="ForgetPwd">Forget Password?</a>
         </div>
       </form>
     </div>

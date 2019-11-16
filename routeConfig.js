@@ -30,4 +30,12 @@ angular.module("agendator").config(function($routeProvider) {
   $routeProvider.when("/newschedule", {
     templateUrl: "view/schedule/newSchedule.html"
   });
+
+  $routeProvider.when("/", {
+    templateUrl: "view/login.html"
+  });
+
+  $routeProvider.when("/dashboard", {
+    templateUrl: "view/dashboard.html"
+  });
 });
