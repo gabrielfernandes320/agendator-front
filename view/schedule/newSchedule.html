@@ -1,0 +1,120 @@
+<div class="jumbotron" ng-controller="userController">
+  <h3>Novo Usuário</h3>
+  <form name="userForm">
+    <select
+      class="form-control"
+      ng-controller="userController"
+      ng-model="schedule.id_usuario"
+      ng-options="user.id as user.nome for user in users"
+      name="userId"
+      ng-required="true"
+    >
+      <option selected disabled value="">Selecione o analista</option>
+    </select>
+    <input
+      type="time"
+      name="starTime"
+      ng-model="schedule.inicio"
+      placeholder="Horario de inicio"
+      id="timepicker"
+      class="form-control"
+    />
+    <input
+      type="time"
+      ng-model="schedule.fim"
+      placeholder="Horario de termino"
+      id="timepicker2"
+      class="form-control"
+    />
+    <input
+      class="form-control"
+      type="text"
+      ng-model="schedule.duracao"
+      placeholder="Duracao em minutos"
+      name="duration"
+      ng-required="true"
+    />
+    <select
+      class="form-control browser-default custom-select"
+      ng-model="schedule.dia_semana"
+      ng-required="true"
+    >
+      <option selected disabled value="">Dia da semana</option>
+      <option value="1">Domingo</option>
+      <option value="2">Segunda-feira</option>
+      <option value="3">Terça-feira</option>
+      <option value="4">Quarta-feira</option>
+      <option value="5">Quinta-feira</option>
+      <option value="6">Sexta-feira</option>
+      <option value="7">Sabádo</option>
+    </select>
+    <input
+      class="form-control"
+      type="text"
+      ng-model="schedule.local"
+      placeholder="Local de atendimento"
+      name="place"
+      ng-required="true"
+    />
+  </form>
+  <div
+    ng-show="userForm.nome.$error.required && userForm.nome.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preecha o nome!
+  </div>
+  <div
+    ng-show="userForm.password.$error.required && userForm.password.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preencha a senha!
+  </div>
+  <div
+    ng-show="userForm.dt_nascimento.$error.required && userForm.dt_nascimento.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preencha a data de nascimento!
+  </div>
+  <div
+    ng-show="userForm.orientador.$error.required && userForm.orientador.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preencha o orientador!
+  </div>
+  <div
+    ng-show="userForm.fase.$error.required && userForm.fase.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preencha a fase!
+  </div>
+  <div ng-show="userForm.nome.$error.minlenght" class="alert alert-danger">
+    O nome deve possuir mais de 5 caracteres!
+  </div>
+  <div
+    ng-show="userForm.celular.$error.required && userForm.celular.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preecha o telefone!
+  </div>
+  <div
+    ng-show="userForm.email.$error.required && userForm.email.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preecha o email!
+  </div>
+  <div
+    ng-show="userForm.email.$invalid && userForm.email.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preencha o email no formato correto!
+  </div>
+  <div>
+    <button
+      class="btn btn-primary btn-block"
+      ng-click="addUser(user)"
+      ng-disabled="userForm.$invalid"
+    >
+      Adicionar usuário
+    </button>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="jumbotron" ng-controller="courseController">
+  <h3>Novo Curso</h3>
+  <form name="courseForm">
+    <input
+      class="form-control"
+      type="text"
+      ng-model="course.nome"
+      placeholder="Nome"
+      name="name"
+      ng-required="true"
+    />
+  </form>
+  <div
+    ng-show="courseForm.nome.$error.required && courseForm.nome.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preecha o nome!
+  </div>
+  <div>
+    <button
+      class="btn btn-primary btn-block"
+      ng-click="addCourse(course)"
+      ng-disabled="courseForm.$invalid"
+    >
+      Adicionar curso
+    </button>
+  </div>
+</div>

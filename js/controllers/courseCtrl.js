@@ -3,11 +3,11 @@ angular
   .controller("courseController", function($scope, $http) {
     $scope.app = "agendator";
     $scope.courses = [];
-    $scope.selectedUser = {};
+    $scope.selectedCourse = {};
 
     $http.defaults.headers.common["Authorization"] =
       "Bearer " +
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGlwbyI6IkEiLCJpYXQiOjE1NzM3Nzc0MjAsImV4cCI6MTU3NDM4MjIyMH0.ER04yOH0f0MLkC7do4_ZUXNX86jW8-5rmbZE2BCXu2w";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGlwbyI6IkEiLCJpYXQiOjE1NzM4Nzc4OTYsImV4cCI6MTU3NDQ4MjY5Nn0.hTEWBs4WV-iukiP9nDlAaeEVF8o8L03_qP0Mv0ETNa0";
     var loadCourses = function() {
       $http
         .get("http://localhost:3333/cursos")
@@ -25,10 +25,10 @@ angular
       console.log("OK");
     };
 
-    $scope.addUser = function(course) {
+    $scope.addCourse = function(course) {
       console.log(course);
       $http
-        .post("http://localhost:3333/usuarios", course)
+        .post("http://localhost:3333/cursos", course)
         .then(successCallback, errorCallback);
       function successCallback() {
         delete $scope.course;
@@ -39,10 +39,10 @@ angular
       }
     };
 
-    $scope.deleteUser = function(course) {
+    $scope.deleteCourse = function(course) {
       $http({
         method: "DELETE",
-        url: "http://localhost:9000/api/v1/customers" + "/" + course.id
+        url: "http://localhost:3333/cursos" + "/" + course.id
       });
       var index = $scope.courses.indexOf(course);
       if (index > -1) {
@@ -50,18 +50,18 @@ angular
       }
     };
 
-    $scope.updateUser = function(course) {
+    $scope.updateCourse = function(course) {
       $http({
         method: "PUT",
-        url: "http://localhost:9000/api/v1/customers" + "/" + course.id,
+        url: "http://localhost:3333/cursos" + "/" + course.id,
         data: course
       });
       $scope.reset();
     };
 
-    var getUser = function(id) {
+    var getCourse = function(id) {
       $http
-        .get("http://localhost:9000/api/v1/customers" + "/" + id)
+        .get("http://localhost:3333/cursos" + "/" + id)
         .then(successCallback, errorCallback);
 
       function successCallback(response) {
@@ -72,24 +72,24 @@ angular
       }
     };
 
-    $scope.isUserSelected = function(courses) {
+    $scope.isCourseSelected = function(courses) {
       return courses.some(function(courses) {
         return courses.selected;
       });
     };
 
     $scope.getTemplate = function(course) {
-      if (course.id === $scope.selectedUser.id) {
+      if (course.id === $scope.selectedCourse.id) {
         return "edit";
       } else return "display";
     };
 
-    $scope.editUser = function(course) {
-      $scope.selectedUser = angular.copy(course);
+    $scope.editCourse = function(course) {
+      $scope.selectedCourse = angular.copy(course);
     };
 
     $scope.reset = function() {
-      $scope.selectedUser = {};
+      $scope.selectedCourse = {};
     };
 
     loadCourses();

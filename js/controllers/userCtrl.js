@@ -5,6 +5,9 @@ angular
     $scope.users = [];
     $scope.selectedUser = {};
 
+    $http.defaults.headers.common["Authorization"] =
+      "Bearer " +
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGlwbyI6IkEiLCJpYXQiOjE1NzM4Nzc4OTYsImV4cCI6MTU3NDQ4MjY5Nn0.hTEWBs4WV-iukiP9nDlAaeEVF8o8L03_qP0Mv0ETNa0";
     var loadUsers = function() {
       $http
         .get("http://localhost:3333/usuarios")

@@ -1,13 +1,33 @@
 angular.module("agendator").config(function($routeProvider) {
   $routeProvider.when("/newuser", {
-    templateUrl: "view/newUser.html"
+    templateUrl: "view/user/newUser.html"
   });
   $routeProvider.when("/users", {
-    templateUrl: "view/listUsers.html",
+    templateUrl: "view/user/listUsers.html",
     controller: "userController"
   });
+
   $routeProvider.when("/courses", {
-    templateUrl: "view/listCourses.html",
+    templateUrl: "view/course/listCourses.html",
     controller: "courseController"
+  });
+  $routeProvider.when("/newcourse", {
+    templateUrl: "view/course/newCourse.html"
+  });
+
+  $routeProvider.when("/activities", {
+    templateUrl: "view/activity/listActivities.html",
+    controller: "activityController"
+  });
+  $routeProvider.when("/newactivity", {
+    templateUrl: "view/activity/newActivity.html"
+  });
+
+  $routeProvider.when("/schedules", {
+    templateUrl: "view/schedule/listSchedules.html",
+    controller: ""
+  });
+  $routeProvider.when("/newschedule", {
+    templateUrl: "view/schedule/newSchedule.html"
   });
 });

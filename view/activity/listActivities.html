@@ -1,0 +1,56 @@
+<div class="jumbotron">
+  <h3>Cursos</h3>
+  <input
+    type="text"
+    class="form-control"
+    ng-model="searchParameter"
+    placeholder="Pesquisar..."
+  />
+  <table class="table table-striped" style="width: 100%;">
+    <thead>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Ativo</th>
+      <th></th>
+    </thead>
+    <tr
+      ng-class="{selected: activity.selected}"
+      ng-repeat="activity in activities | filter: searchParameter"
+      ng-include="getTemplate(activity)"
+    ></tr>
+  </table>
+
+  <script type="text/ng-template" id="display">
+    <td>{{ activity.id }}</td>
+    <td>{{ activity.nome }}</td>
+    <td>{{ activity.ativo }}</td>
+    <td>
+      <div style="width: 20px; height: 20px;"></div>
+    </td>
+    <td>
+      <button type="button" class="btn btn-primary btn-primary" ng-click="editActivity(activity)">Editar</button>
+      <button class="btn btn-danger" ng-click="deleteActivity(activity)">Apagar</button>
+    </td>
+  </script>
+
+  <script type="text/ng-template" id="edit">
+    <td>{{ activity.id }}</td>
+    <td><input type="text" ng-model=activity.nome placeholder="activity.nome" class="form-control input-sm"/></td>
+    <td> <select
+      class="form-control browser-default custom-select"
+      ng-model="activity.ativo"
+      ng-required="true"
+    >
+      <option selected>{{activity.ativo}}</option>
+      <option value="A">Ativo</option>
+      <option value="D">Inativo</option>
+    </select></td>
+    <td>
+      <div class="btn-group">
+     <button type="button" class="btn btn-primary" ng-click="updateActivity(activity)">Salvar</button>
+     <button type="button" class="btn btn-danger" ng-click="reset()">Cancelar</button>
+     </div>
+    </td>
+  </script>
+  <hr />
+</div>

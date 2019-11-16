@@ -1,0 +1,54 @@
+<div class="jumbotron">
+  <h3>Clientes</h3>
+  <input
+    type="text"
+    class="form-control"
+    ng-model="searchParameter"
+    placeholder="Pesquisar..."
+  />
+  <table class="table table-striped" style="width: 100%;">
+    <thead>
+      <th>Id</th>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Endereço</th>
+      <th></th>
+    </thead>
+    <tr
+      ng-class="{selected: client.selected}"
+      ng-repeat="client in clients | filter: searchParameter"
+      ng-include="getTemplate(client)"
+    ></tr>
+  </table>
+
+  <script type="text/ng-template" id="display">
+    <td>{{ client.id }}</td>
+    <td>{{ client.name }}</td>
+    <td>{{ client.email }}</td>
+    <td>{{ client.phone }}</td>
+    <td>{{ client.adress }}</td>
+    <td>
+      <div style="width: 20px; height: 20px;"></div>
+    </td>
+    <td>
+      <button type="button" class="btn btn-primary btn-primary" ng-click="editClient(client)">Editar</button>
+      <button class="btn btn-danger" ng-click="deleteClient(client)">Apagar</button>
+    </td>
+  </script>
+
+  <script type="text/ng-template" id="edit">
+    <td>{{ client.id }}</td>
+    <td><input type="text" ng-model=client.name class="form-control input-sm"/></td>
+    <td><input type="text" ng-model=client.email class="form-control input-sm"/></td>
+    <td><input type="text" ng-model=client.phone class="form-control input-sm"/></td>
+    <td><input type="text" ng-model=client.adress class="form-control input-sm"/></td>
+    <td>
+      <div class="btn-group">
+     <button type="button" class="btn btn-primary" ng-click="updateClient(client)">Salvar</button>
+     <button type="button" class="btn btn-danger" ng-click="reset()">Cancelar</button>
+     </div>
+    </td>
+  </script>
+  <hr />
+</div>

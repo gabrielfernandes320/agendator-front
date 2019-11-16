@@ -1,0 +1,39 @@
+<div class="jumbotron" ng-controller="activityController">
+  <h3>Nova Atividade</h3>
+  <form name="activityForm">
+    <input
+      class="form-control"
+      type="text"
+      ng-model="activity.nome"
+      placeholder="Nome"
+      name="name"
+      ng-required="true"
+    />
+    <select
+      class="form-control browser-default custom-select"
+      ng-model="activity.ativo"
+      ng-required="true"
+    >
+      <option value="" selected disabled
+        >Selecione o estado da atividade</option
+      >
+      <option value="A">Ativa</option>
+      <option value="D">Inativa</option>
+    </select>
+  </form>
+  <div
+    ng-show="activityForm.name.$error.required && activityForm.name.$dirty"
+    class="alert alert-danger"
+  >
+    Por favor, preecha o nome!
+  </div>
+  <div>
+    <button
+      class="btn btn-primary btn-block"
+      ng-click="addActivity(activity)"
+      ng-disabled="activityForm.$invalid"
+    >
+      Adicionar atividade
+    </button>
+  </div>
+</div>
