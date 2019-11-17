@@ -5,6 +5,7 @@ angular
     $scope.users = [];
     $scope.selectedUser = {};
     $scope.logged = false;
+    $scope.loggedUser = Login.getLoggedUser();
 
     $http.defaults.headers.common["Authorization"] =
       "Bearer " + Login.getAutToken();
