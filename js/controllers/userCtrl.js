@@ -1,15 +1,13 @@
 angular
   .module("agendator")
-  .controller("userController", function($scope, $http) {
+  .controller("userController", function($scope, $http, Login) {
     $scope.app = "agendator";
     $scope.users = [];
     $scope.selectedUser = {};
     $scope.logged = false;
-    $scope.autToken = {};
-    $scope.loggedUser = {};
 
     $http.defaults.headers.common["Authorization"] =
-      "Bearer " + $scope.autToken;
+      "Bearer " + Login.getAutToken();
     var loadUsers = function() {
       $http
         .get("http://localhost:3333/usuarios")
@@ -28,8 +26,9 @@ angular
         .post("http://localhost:3333/sessions", user)
         .then(successCallback, errorCallback);
       function successCallback(response) {
-        $scope.autToken = response.data.token;
-        $scope.loggedUser = res.data.usuario;
+        console.log(response);
+        Login.setAutToken(response.data.token);
+        Login.setLoggedUser(response.data.usuario);
         $scope.logged = true;
       }
       function errorCallback(error) {

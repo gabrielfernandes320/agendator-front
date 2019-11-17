@@ -1,13 +1,12 @@
 angular
   .module("agendator")
-  .controller("courseController", function($scope, $http) {
+  .controller("courseController", function($scope, $http, Login) {
     $scope.app = "agendator";
     $scope.courses = [];
     $scope.selectedCourse = {};
 
     $http.defaults.headers.common["Authorization"] =
-      "Bearer " +
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidGlwbyI6IkEiLCJpYXQiOjE1NzM4Nzc4OTYsImV4cCI6MTU3NDQ4MjY5Nn0.hTEWBs4WV-iukiP9nDlAaeEVF8o8L03_qP0Mv0ETNa0";
+      "Bearer " + Login.getAutToken();
     var loadCourses = function() {
       $http
         .get("http://localhost:3333/cursos")
