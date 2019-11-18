@@ -38,7 +38,7 @@
       ng-model="user.fase"
       ng-required="true"
     >
-      <option selected>Fase</option>
+      <option value="" selected disabled hidden>Fase</option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">4</option>
@@ -54,10 +54,14 @@
       ng-model="user.tipo"
       ng-required="true"
     >
-      <option selected>Tipo de usuario</option>
-      <option value="M">Monitorando</option>
-      <option value="A">Administrador</option>
-      <option value="L">Analista</option>
+      <option value="" selected disabled hidden>Tipo de usuario</option>
+      <option ng-if="!logged || loggedUser.tipo === 'A'" value="M"
+        >Monitorando</option
+      >
+      <option ng-if="logged && loggedUser.tipo === 'A'" value="A"
+        >Administrador</option
+      >
+      <option ng-if="logged" value="L">Analista</option>
     </select>
     <input
       class="form-control"
@@ -98,7 +102,7 @@
       ng-model="user.sexo"
       ng-required="true"
     >
-      <option selected>Sexo</option>
+      <option value="" selected disabled hidden>Sexo</option>
       <option value="M">Masculino</option>
       <option value="F">Feminino</option>
     </select>
@@ -159,6 +163,8 @@
       class="btn btn-primary btn-block"
       ng-click="addUser(user)"
       ng-disabled="userForm.$invalid"
+      ng-if="!logged"
+      href="#!/"
     >
       Adicionar usuário
     </button>

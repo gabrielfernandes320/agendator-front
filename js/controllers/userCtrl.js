@@ -4,7 +4,7 @@ angular
     $scope.app = "agendator";
     $scope.users = [];
     $scope.selectedUser = {};
-    $scope.logged = false;
+    $scope.logged = Login.getLogged();
     $scope.loggedUser = Login.getLoggedUser();
 
     $http.defaults.headers.common["Authorization"] =
@@ -30,6 +30,8 @@ angular
         console.log(response);
         Login.setAutToken(response.data.token);
         Login.setLoggedUser(response.data.usuario);
+        Login.setLogged();
+
         $scope.logged = true;
       }
       function errorCallback(error) {

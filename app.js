@@ -3,6 +3,7 @@ var app = angular.module("agendator", ["ngRoute"]);
 app.factory("Login", function() {
   var loggedUser;
   var autToken;
+  var logged = false;
 
   return {
     setAutToken: function(AutToken) {
@@ -16,6 +17,12 @@ app.factory("Login", function() {
     },
     getLoggedUser: function() {
       return loggedUser;
+    },
+    setLogged: function() {
+      logged = true;
+    },
+    getLogged: function() {
+      return logged;
     }
   };
 });
