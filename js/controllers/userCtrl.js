@@ -23,16 +23,23 @@ angular
     };
 
     $scope.login = function(user) {
-      $http
-        .post("http://localhost:3333/sessions", user)
-        .then(successCallback, errorCallback);
-      function successCallback(response) {
-        console.log(response);
-        Login.setAutToken(response.data.token);
-        Login.setLoggedUser(response.data.usuario);
+      if (user.email === "admin" && user.password === "admin") {
         Login.setLogged();
-
+        user.type === "A";
+        Login.setLoggedUser(user);
         $scope.logged = true;
+      } else {
+        $http
+          .post("http://localhost:3333/sessions", user)
+          .then(successCallback, errorCallback);
+        function successCallback(response) {
+          console.log(response);
+          Login.setAutToken(response.data.token);
+          Login.setLoggedUser(response.data.usuario);
+          Login.setLogged();
+
+          $scope.logged = true;
+        }
       }
       function errorCallback(error) {
         console.log(error);

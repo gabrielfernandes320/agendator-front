@@ -22,6 +22,9 @@ angular.module("agendator").config(function($routeProvider) {
   $routeProvider.when("/newactivity", {
     templateUrl: "view/activity/newActivity.html"
   });
+  $routeProvider.when("/associateactivities", {
+    templateUrl: "view/activity/associateActivities.html"
+  });
 
   $routeProvider.when("/schedules", {
     templateUrl: "view/schedule/listSchedules.html",
@@ -29,6 +32,14 @@ angular.module("agendator").config(function($routeProvider) {
   });
   $routeProvider.when("/newschedule", {
     templateUrl: "view/schedule/newSchedule.html"
+  });
+
+  $routeProvider.when("/services", {
+    templateUrl: "view/service/listServices.html",
+    controller: ""
+  });
+  $routeProvider.when("/newservice", {
+    templateUrl: "view/service/newService.html"
   });
 
   $routeProvider.when("/", {

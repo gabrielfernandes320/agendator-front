@@ -1,0 +1,62 @@
+<div class="jumbotron" ng-controller="scheduleController">
+  <h3>novo Atendimento</h3>
+  <form name="serviceForm">
+    <select
+      class="form-control browser-default custom-select"
+      ng-model="service.atividade"
+      ng-required="true"
+      ng-controller="activityController"
+      ng-options="activity.id as activity.nome for activity in activities"
+    >
+      <option value="" selected disabled>Selecione a atividade desejada</option>
+    </select>
+    <input
+      class="form-control"
+      type="date"
+      ng-change="loadAvailableServices()"
+      ng-model="service.dt_atendimento"
+      name="date"
+      ng-required="true"
+    />
+    <select
+      class="form-control browser-default custom-select"
+      ng-model="service.analista"
+      ng-required="true"
+      ng-controller="userController"
+      ng-options="user.id as user.nome for user in users | filter:{tipo:'L'}"
+      ng-change="loadAvailableServices()"
+    >
+      <option value="" selected disabled>Selecione o analista</option>
+    </select>
+    <select
+      class="form-control browser-default custom-select"
+      ng-model="horario"
+      ng-required="true"
+      ng-options="service as (service.inicio + ' - ' + service.fim) for service in services | filter:{disponivel:'true'}"
+    >
+      <option value="" selected disabled>Selecione o horario desejado</option>
+    </select>
+    <input
+      class="form-control"
+      type="text"
+      disabled
+      placeholder="Local de atendimento"
+      ng-model="horario.local"
+      name="location"
+      ng-required="true"
+    />
+    <input
+      class="form-control"
+      type="text"
+      disabled
+      placeholder="Data de atendimento"
+      name="serviceDate"
+      ng-required="true"
+    />
+  </form>
+  <div>
+    <button class="btn btn-primary btn-block" ng-click="addService(service)">
+      Agendar atendimento
+    </button>
+  </div>
+</div>

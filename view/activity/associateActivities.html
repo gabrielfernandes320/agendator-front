@@ -1,0 +1,30 @@
+<div class="jumbotron" ng-controller="userController">
+  <h3>{{selectedActivity}}</h3>
+
+  <input
+    type="text"
+    class="form-control"
+    ng-model="searchParameter"
+    placeholder="Pesquisar..."
+  />
+  <select
+    ng-controller="activityController"
+    class="form-control"
+    ng-click="setSelected(activityId)"
+    ng-model="activityId"
+    ng-options="activity.id as activity.nome for activity in activities"
+  >
+    <option selected disabled value="">Atividade</option>
+  </select>
+
+  <table class="table table-striped" style="width: 50%;">
+    <tr
+      ng-class="{selected: activity.selected}"
+      ng-repeat="user in selectedActivity.usuarios"
+    >
+      <td>{{ user.id }}</td>
+      <td>{{ user.nome }}</td>
+      <td><input type="checkbox" name="" id="" /></td>
+    </tr>
+  </table>
+</div>

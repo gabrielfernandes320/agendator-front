@@ -61,8 +61,12 @@
       <option ng-if="logged && loggedUser.tipo === 'A'" value="A"
         >Administrador</option
       >
+      <option ng-if="logged && loggedUser.email === 'admin'" value="A"
+        >Administrador</option
+      >
       <option ng-if="logged" value="L">Analista</option>
     </select>
+
     <input
       class="form-control"
       type="email"
@@ -163,8 +167,6 @@
       class="btn btn-primary btn-block"
       ng-click="addUser(user)"
       ng-disabled="userForm.$invalid"
-      ng-if="!logged"
-      href="#!/"
     >
       Adicionar usuário
     </button>

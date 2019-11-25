@@ -6,6 +6,9 @@ angular
     $scope.selectedSchedule = {};
     $scope.loggedUser = Login.getLoggedUser();
     $scope.schedule = {};
+    $scope.service = {};
+    $scope.services = [];
+    $scope.horario = {};
     $scope.schedule.id_usuario = $scope.loggedUser.id;
 
     $http.defaults.headers.common["Authorization"] =
@@ -23,8 +26,46 @@ angular
       }
     };
 
+    $scope.loadAvailableServices = function() {
+      $http
+        .get(
+          "http://localhost:3333/atendimentos/horarios?" +
+            "analista=" +
+            $scope.service.analista +
+            "&data=" +
+            convertDate($scope.service.dt_atendimento)
+        )
+        .then(successCallback, errorCallback);
+
+      function successCallback(response) {
+        $scope.services = [];
+        $scope.services = response.data;
+      }
+      function errorCallback(error) {
+        console.log(error);
+      }
+    };
+
     $scope.vai = function() {
       console.log("OK");
+    };
+
+    $scope.addService = function(service) {
+      $scope.service.monitorando = $scope.loggedUser.id;
+      $scope.service.hr_inicio = $scope.horario.inicio;
+      $scope.service.hr_fim = $scope.horario.fim;
+      $scope.service.dt_atendimento;
+      $scope.service.situacao = "A";
+      $http
+        .post("http://localhost:3333/atendimentos", service)
+        .then(successCallback, errorCallback);
+      function successCallback() {
+        delete $scope.service;
+        $scope.serviceForm.$setPristine();
+      }
+      function errorCallback(error) {
+        console.log(error);
+      }
     };
 
     $scope.addSchedule = function(schedule) {
@@ -96,4 +137,14 @@ angular
 
     loadSchedules();
     console.log($scope.schedules);
+
+    var convertDate = function(inputFormat) {
+      function pad(s) {
+        return s < 10 ? "0" + s : s;
+      }
+      var d = new Date(inputFormat);
+      return [pad(d.getFullYear(), pad(d.getMonth() + 1), d.getDate())].join(
+        "-"
+      );
+    };
   });

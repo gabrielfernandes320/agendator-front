@@ -4,6 +4,8 @@ angular
     $scope.app = "agendator";
     $scope.activities = [];
     $scope.selectedActivity = {};
+    $scope.userActivities = {};
+    $scope.activityId = {};
 
     $http.defaults.headers.common["Authorization"] =
       "Bearer " + Login.getAutToken();
@@ -18,10 +20,6 @@ angular
       function errorCallback(error) {
         console.log(error);
       }
-    };
-
-    $scope.vai = function() {
-      console.log("OK");
     };
 
     $scope.addActivity = function(activity) {
@@ -91,6 +89,14 @@ angular
       $scope.selectedActivity = {};
     };
 
+    $scope.setSelected = function(activityId) {
+      $scope.activityId = activityId;
+      console.log($scope.activityId);
+      $scope.selectedActivity = $scope.activities.find(
+        o => o.id === activityId
+      );
+      console.log($scope.selectedActivity);
+    };
+
     loadActivities();
-    console.log($scope.activities);
   });
