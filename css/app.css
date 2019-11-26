@@ -154,3 +154,18 @@ body {
   font-weight: 600;
   text-decoration: none;
 }
+
+.tableButton {
+  text-align: center;
+}
+.tableContainer img,
+.tableContainer .tableButton button {
+  width: 520px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.selected {
+  background-color: #423f3f;
+}

@@ -1,5 +1,5 @@
-<div class="jumbotron" ng-controller="userController">
-  <h3>{{selectedActivity}}</h3>
+<div class="jumbotron" ng-controller="activityController">
+  <h3>Associar atividades a Usuarios</h3>
 
   <input
     type="text"
@@ -8,7 +8,6 @@
     placeholder="Pesquisar..."
   />
   <select
-    ng-controller="activityController"
     class="form-control"
     ng-click="setSelected(activityId)"
     ng-model="activityId"
@@ -16,15 +15,73 @@
   >
     <option selected disabled value="">Atividade</option>
   </select>
-
-  <table class="table table-striped" style="width: 50%;">
-    <tr
-      ng-class="{selected: activity.selected}"
-      ng-repeat="user in selectedActivity.usuarios"
-    >
-      <td>{{ user.id }}</td>
-      <td>{{ user.nome }}</td>
-      <td><input type="checkbox" name="" id="" /></td>
+  {{selectedActivity.usuarios}}
+  <table>
+    <tr>
+      <td>
+        <div ng-controller="userController" class="tableContainer">
+          <div>
+            <table class="table table-striped">
+              <caption style="caption-side: top">
+                Analistas cadastrados
+              </caption>
+              <thead>
+                <th>Id</th>
+                <th>Nome</th>
+              </thead>
+              <tr
+                ng-class="{selected: user.selected}"
+                ng-repeat="user in users | filter: { tipo: 'L' }"
+              >
+                <td><input type="checkbox" ng-model="user.selected" /></td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nome }}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="tableButton">
+            <button
+              class="btn btn-primary"
+              style="text-align:center;"
+              ng-click=""
+            >
+              Habilitar usuarios para atividade
+            </button>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="tableContainer">
+          <div>
+            <table class="table table-striped">
+              <caption style="caption-side: top">
+                Usuarios habilitados para a atividade
+              </caption>
+              <thead>
+                <th>Id</th>
+                <th>Nome</th>
+              </thead>
+              <tr
+                ng-class="{selected: user.selected}"
+                ng-repeat="user in selectedActivity.usuarios"
+              >
+                <td><input type="checkbox" ng-model="user.selected" /></td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nome }}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="tableButton">
+            <button
+              class="btn btn-danger"
+              style="text-align:center;"
+              ng-click="removeUsersFromActivity()"
+            >
+              Desabilitar usuarios para atividade
+            </button>
+          </div>
+        </div>
+      </td>
     </tr>
   </table>
 </div>

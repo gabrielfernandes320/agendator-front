@@ -98,5 +98,17 @@ angular
       console.log($scope.selectedActivity);
     };
 
+    $scope.removeUsersFromActivity = function() {
+      $scope.selectedActivity.usuarios = $scope.selectedActivity.usuarios.filter(
+        function(user) {
+          if (!user.selected) {
+            return user;
+          } else {
+            console.log(user);
+          }
+        }
+      );
+    };
+
     loadActivities();
   });
