@@ -99,15 +99,31 @@ angular
     };
 
     $scope.removeUsersFromActivity = function() {
+      $scope.selectedActivity.usuarios = [];
       $scope.selectedActivity.usuarios = $scope.selectedActivity.usuarios.filter(
         function(user) {
           if (!user.selected) {
             return user;
           } else {
-            console.log(user);
+            $scope.selectedActivity.usuarios.push(user);
           }
         }
       );
+      $scope.updateActivity(selectedActivity);
+    };
+
+    $scope.addUsersInActivity = function(users) {
+      $scope.selectedActivity.usuarios = users;
+      $scope.selectedActivity.usuarios = $scope.selectedActivity.usuarios.filter(
+        function(user) {
+          if (!user.selected) {
+            return user;
+          } else {
+            $scope.selectedActivity.usuarios.push(user);
+          }
+        }
+      );
+      $scope.updateActivity(selectedActivity);
     };
 
     loadActivities();

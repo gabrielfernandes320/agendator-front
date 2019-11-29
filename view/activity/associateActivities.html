@@ -1,12 +1,6 @@
 <div class="jumbotron" ng-controller="activityController">
   <h3>Associar atividades a Usuarios</h3>
 
-  <input
-    type="text"
-    class="form-control"
-    ng-model="searchParameter"
-    placeholder="Pesquisar..."
-  />
   <select
     class="form-control"
     ng-click="setSelected(activityId)"
@@ -15,7 +9,6 @@
   >
     <option selected disabled value="">Atividade</option>
   </select>
-  {{selectedActivity.usuarios}}
   <table>
     <tr>
       <td>
@@ -33,7 +26,13 @@
                 ng-class="{selected: user.selected}"
                 ng-repeat="user in users | filter: { tipo: 'L' }"
               >
-                <td><input type="checkbox" ng-model="user.selected" /></td>
+                <td>
+                  <input
+                    type="checkbox"
+                    ng-model="user.selected"
+                    ng-click="addUsersInActivity(users)"
+                  />
+                </td>
                 <td>{{ user.id }}</td>
                 <td>{{ user.nome }}</td>
               </tr>
@@ -75,7 +74,7 @@
             <button
               class="btn btn-danger"
               style="text-align:center;"
-              ng-click="removeUsersFromActivity()"
+              ng-click=""
             >
               Desabilitar usuarios para atividade
             </button>
